@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Displayinfor.scss";
 // import logo from "./../logo.svg";
 // class Displayinfor extends React.Component {
@@ -64,47 +64,86 @@ import "./Displayinfor.scss";
 // }
 
 // function component doesn't use this
-const Displayinfor = (props) => {
-  const { listUsers } = props;
+// const Displayinfor = (props) => {
+//   const { listUsers = [] } = props;
 
+//   const [isshowListUser, setShowHideListUser] = useState(true);
+
+//   const handleShowHide = () => {
+//     setShowHideListUser(!isshowListUser);
+//   };
+//   return (
+//     <div>
+//       <div>
+//         <span
+//           onClick={() => {
+//             handleShowHide();
+//           }}
+//         >
+//           {isshowListUser === true ? "hide the user" : "Show List Users"}
+//         </span>
+//       </div>
+
+//       {isshowListUser && (
+//         <div>
+//           {listUsers.map((user) => {
+//             <div key={user.id} className={user.age > 20 ? "red" : "green"}>
+//               <div>My name {user.name}</div>
+//               <div>My age {user.age}</div>
+
+//               <div>
+//                 <button
+//                   onClick={() => {
+//                     props.handleDeleteUser(user.id);
+//                   }}
+//                 >
+//                   Delete
+//                 </button>
+//               </div>
+//             </div>;
+//           })}
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+// export default Displayinfor;
+
+const Displayinfor = (props) => {
+  const { listUsers = [] } = props; // Default to an empty array
   const [isshowListUser, setShowHideListUser] = useState(true);
 
   const handleShowHide = () => {
     setShowHideListUser(!isshowListUser);
   };
+
+  useEffect(() => {
+    if (listUsers.length === 0) {
+      alert("You have been delete all item");
+    }
+  }, [listUsers]);
+
   return (
     <div>
       <div>
-        <span
-          onClick={() => {
-            handleShowHide();
-          }}
-        >
-          {isshowListUser === true ? "hide the user" : "Show List Users"}
+        <span onClick={handleShowHide}>
+          {isshowListUser ? "Hide the users" : "Show List Users"}
         </span>
       </div>
-      {/* so you print the screen */}
       {isshowListUser && (
-        <>
-          {listUsers.map((user) => {
-            return (
-              <div key={user.id} className={user.age > 20 ? "red" : "green"}>
-                <div>My name {user.name}</div>
-                <div>My age {user.age}</div>
-
-                <div>
-                  <button
-                    onClick={() => {
-                      props.handleDeleteUser(user.id);
-                    }}
-                  >
-                    Delete
-                  </button>
-                </div>
+        <div>
+          {listUsers.map((user) => (
+            <div key={user.id} className={user.age > 20 ? "red" : "green"}>
+              <div>My name {user.name}</div>
+              <div>My age {user.age}</div>
+              <div>
+                <button onClick={() => props.handleDeleteUser(user.id)}>
+                  Delete
+                </button>
               </div>
-            );
-          })}
-        </>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

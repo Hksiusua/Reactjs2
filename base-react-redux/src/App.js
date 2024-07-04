@@ -10,6 +10,7 @@ const App = () => {
   return (
     <div className="app-container">
       Trần Công Nghĩa
+      <button class="btn btn-primary">Save</button>
       <Mycomponent></Mycomponent>
     </div>
     // <div className="App">
