@@ -1,30 +1,25 @@
 import logo from "./logo.svg";
 import "./App.scss";
-import Mycomponent from "./components/Mycomponent";
+import Header from "./components/header/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { increaseCounter, decreaseCounter } from "./redux/action/counterAction";
-const App = () => {
-  const count = useSelector((state) => state.counter.count);
-  const dispatch = useDispatch();
+import { Link } from "react-router-dom";
 
+const App = () => {
   return (
-    <div className="app-container">
-      Trần Công Nghĩa
-      <button class="btn btn-primary">Save</button>
-      <Mycomponent></Mycomponent>
+    <div className="container">
+      <Header></Header>
+      <div>hello</div>
+      <div></div>
+      <div>
+        <button>
+          <Link to="/admins">Go to admin page</Link>
+        </button>
+
+        <button>
+          <Link to="/users">Go to user page</Link>
+        </button>
+      </div>
     </div>
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <div>Count = {count}</div>
-    //     <button onClick={() => dispatch(increaseCounter())}>Increase</button>
-    //     <button onClick={() => dispatch(decreaseCounter())}>Decrease</button>
-    //   </header>
-    // </div>
   );
 };
-
 export default App;
