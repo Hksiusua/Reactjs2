@@ -47,6 +47,8 @@ import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import "./SideBar.scss";
 import "./Admin.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = React.useState(false);
@@ -76,7 +78,10 @@ const SideBar = () => {
             className="sb-button"
             onClick={() => setCollapsed(!collapsed)}
           >
-            (=)
+            <FontAwesomeIcon
+              icon={faCircleChevronLeft}
+              className="fa-solid fa-circle-chevron-left"
+            />
           </button>
         </div>
       </main>
