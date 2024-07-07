@@ -1,7 +1,22 @@
+import ModalCreateUser from "./ModalCreateUser";
+
 const Manager = (props) => {
   return (
     <>
-      <h2>Manager</h2>
+      <div className="mannager-user-container">
+        <div className="title-manager"></div>
+        <div className="users-content">
+          <div>
+            <button>Add new users</button>
+          </div>
+
+          <div>
+            table users
+            <br></br>
+            <ModalCreateUser></ModalCreateUser>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

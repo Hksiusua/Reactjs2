@@ -1,8 +1,10 @@
 .admin-container {
   display: flex;
   .admin-sidebar {
-    .pro-sidebar {
-      height: 100vh !important;
-    }
+    position: relative;
+  }
+  .admin-content {
+    width: 100%;
+    padding: 30px 30px;
   }
 }
