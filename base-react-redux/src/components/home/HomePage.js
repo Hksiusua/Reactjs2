@@ -1,5 +1,4 @@
 // import Image from "../../assets/hinhTest.jpg";
-import Image from "../assets/hinhTest.jpg";
 import "./HomePage.scss";
 
 const HomePage = (props) => {

@@ -1,22 +1,37 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "./ModalCreateUser.scss";
 // import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { createUser } from "../../service/apiService";
+import { putUpdateUser } from "../../service/apiService";
+import _ from "lodash";
 
-const ModalCreateUser = (props) => {
-  const { show, onHide } = props;
+const ModalUpdateUser = (props) => {
+  const { show, onHide, dataUpdate } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("USER");
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState("");
+  useEffect(() => {
+    console.log("runnn useefffect", dataUpdate);
+    if (!_.isEmpty(dataUpdate)) {
+      //update state
+      setEmail(dataUpdate.email);
+      setUsername(dataUpdate.username);
+      setPassword(dataUpdate.password);
+      setRole(dataUpdate.role);
+      setImage("");
+      if (dataUpdate.image) {
+        setPreviewImage(`data:image/jpeg;base64,${dataUpdate.image}`);
+      }
+    }
+  }, [dataUpdate]); // the each run data change so effect run again
 
   const handleClose = () => {
     onHide();
@@ -37,40 +52,22 @@ const ModalCreateUser = (props) => {
     }
   };
 
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-
-  const handleCreateUser = async () => {
-    let isValidate = validateEmail(email);
-    if (!isValidate) {
-      // alert("no no no ");
-      toast.error("Please format email is right");
-      return;
-    }
-
-    if (!password) {
-      toast.error("Please format password is right");
-      return;
-    }
-
-    let res = await createUser(email, password, username, role, image);
-    console.log(res.data); // this data own axios
+  const handleUpdateUser = async () => {
+    let res = await putUpdateUser(dataUpdate.id, username, role, image);
+    // console.log(res.data); // this data own axios
 
     if (res.data && res.data.EC === 0) {
       toast.success(res.data.EM);
       handleClose();
-      await props.fetchListUser(); // Directly use fetchListUser here
+      props.fetchListUser(); // Directly use fetchListUser here
     }
 
     if (res.data && res.data.EC !== 0) {
       toast.error(res.data.EM);
     }
   };
+
+  console.log("check dataupdate:", props.dataUpdate);
 
   return (
     <Modal show={show} onHide={handleClose} size="xl">
@@ -87,6 +84,7 @@ const ModalCreateUser = (props) => {
             type="email"
             className="form-control"
             value={email}
+            disabled
           />
         </div>
 
@@ -111,6 +109,7 @@ const ModalCreateUser = (props) => {
             type="password"
             className="form-control"
             value={password}
+            disabled
           />
         </div>
         <label htmlFor="exampleFormControlInput1" className="form-label">
@@ -150,7 +149,7 @@ const ModalCreateUser = (props) => {
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleCreateUser}>
+        <Button variant="primary" onClick={handleUpdateUser}>
           Save Changes
         </Button>
       </Modal.Footer>
@@ -158,4 +157,4 @@ const ModalCreateUser = (props) => {
   );
 };
 
-export default ModalCreateUser;
+export default ModalUpdateUser;

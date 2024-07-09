@@ -1,7 +1,38 @@
-import { useState } from "react";
+// import { useState } from "react";
 import ModalCreateUser from "./ModalCreateUser";
+import ModalUpdateUser from "./ModalUpdateUser";
+import Table from "./Table";
+
+import { useEffect, useState } from "react";
+import { showAllUser } from "../../service/apiService";
 const Manager = (props) => {
   const [showModalCreateUser, setshowModalCreateUser] = useState(false);
+  const [dataUpdate, setDataUpdate] = useState({});
+  const [ListUser, setListUser] = useState([]);
+  const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+
+  useEffect(() => {
+    fetchListUser();
+  }, []);
+
+  const fetchListUser = async () => {
+    try {
+      let res = await showAllUser();
+      if (res.data.EC === 0) {
+        setListUser(res.data.DT);
+      } else {
+      }
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+
+  const handleClickBtnUpdate = (user) => {
+    setShowModalUpdateUser(true);
+    setDataUpdate(user);
+    // console.log("update user: ", user);
+  };
+
   return (
     <>
       <div className="mannager-user-container">
@@ -19,12 +50,23 @@ const Manager = (props) => {
           </div>
 
           <div>
-            table users
+            <Table
+              ListUser={ListUser}
+              handleClickBtnUpdate={handleClickBtnUpdate}
+            ></Table>
             <br></br>
             <ModalCreateUser
               show={showModalCreateUser}
               onHide={() => setshowModalCreateUser(false)}
+              fetchListUser={fetchListUser}
             ></ModalCreateUser>
+
+            <ModalUpdateUser
+              show={showModalUpdateUser}
+              onHide={() => setShowModalUpdateUser(false)}
+              fetchListUser={fetchListUser}
+              dataUpdate={dataUpdate}
+            ></ModalUpdateUser>
           </div>
         </div>
       </div>
