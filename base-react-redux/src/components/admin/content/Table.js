@@ -25,7 +25,11 @@ const Table = (props) => {
                   <div className="col-md-3">
                     <button
                       type="button"
-                      class="btn btn-success  designSizeButton"
+                      className="btn btn-success  designSizeButton"
+                      onClick={() => {
+                        props.handleClickBtnView(user);
+                        console.log("ádsadasd", user);
+                      }}
                     >
                       View
                     </button>
@@ -33,7 +37,7 @@ const Table = (props) => {
                   <div className="col-md-3 ">
                     <button
                       type="button"
-                      class="btn btn-warning  designSizeButton"
+                      className="btn btn-warning  designSizeButton"
                       onClick={() => {
                         props.handleClickBtnUpdate(user);
                       }}
@@ -44,7 +48,7 @@ const Table = (props) => {
                   <div className="col-md-3 ">
                     <button
                       type="button"
-                      class="btn btn-danger  designSizeButton"
+                      className="btn btn-danger designSizeButton"
                     >
                       Delete
                     </button>

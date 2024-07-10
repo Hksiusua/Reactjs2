@@ -7,10 +7,9 @@ import "./ModalCreateUser.scss";
 // import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { putUpdateUser } from "../../service/apiService";
 import _ from "lodash";
 
-const ModalViewUser = (props) => {
+const ModalUpdateUser = (props) => {
   const { show, onHide, dataUpdate } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,20 +17,6 @@ const ModalViewUser = (props) => {
   const [role, setRole] = useState("USER");
   const [image, setImage] = useState("");
   const [previewImage, setPreviewImage] = useState("");
-  useEffect(() => {
-    // console.log("runnn useefffect", dataUpdate);
-    if (!_.isEmpty(dataUpdate)) {
-      //update state
-      setEmail(dataUpdate.email);
-      setUsername(dataUpdate.username);
-      setPassword(dataUpdate.password);
-      setRole(dataUpdate.role);
-      setImage("");
-      if (dataUpdate.image) {
-        setPreviewImage(`data:image/jpeg;base64,${dataUpdate.image}`);
-      }
-    }
-  }, [dataUpdate]); // the each run data change so effect run again
 
   const handleClose = () => {
     onHide();
@@ -49,21 +34,6 @@ const ModalViewUser = (props) => {
       setImage(event.target.files[0]);
     } else {
       setPreviewImage("");
-    }
-  };
-
-  const handleUpdateUser = async () => {
-    let res = await putUpdateUser(dataUpdate.id, username, role, image);
-    // console.log(res.data); // this data own axios
-
-    if (res.data && res.data.EC === 0) {
-      toast.success(res.data.EM);
-      handleClose();
-      props.fetchListUser(); // Directly use fetchListUser here
-    }
-
-    if (res.data && res.data.EC !== 0) {
-      toast.error(res.data.EM);
     }
   };
 
@@ -149,12 +119,9 @@ const ModalViewUser = (props) => {
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        {/* <Button variant="primary" onClick={handleUpdateUser}>
-          Save Changes
-        </Button> */}
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default ModalViewUser;
+export default ModalUpdateUser;
