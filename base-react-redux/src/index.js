@@ -11,6 +11,10 @@ import Admin from "./components/admin/Admin";
 import HomePage from "./components/home/HomePage";
 import Manager from "./components/admin/content/Manager";
 import DashBoard from "./components/admin/content/DashBoard";
+import Login from "./components/Auth/Login";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -25,7 +29,21 @@ root.render(
         <Route index element={<DashBoard />}></Route>
         <Route path="manage-users" element={<Manager />}></Route>
       </Route>
+
+      <Route path="/logins" element={<Login />}></Route>
     </Routes>
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+    />
   </BrowserRouter>
 );
 

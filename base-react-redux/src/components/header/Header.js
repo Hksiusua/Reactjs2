@@ -25,7 +25,7 @@ function BasicExample() {
             </NavLink>
           </Nav>
           <Nav>
-            <NavLink to="/" className="nav-link fontText">
+            <NavLink to="/logins" className="nav-link fontText">
               Login
             </NavLink>
 
@@ -33,7 +33,7 @@ function BasicExample() {
               Sign up
             </NavLink>
 
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+            {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Another action
@@ -43,7 +43,7 @@ function BasicExample() {
               <NavDropdown.Item href="#action/3.4">
                 Separated link
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

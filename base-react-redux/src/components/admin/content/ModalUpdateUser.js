@@ -59,7 +59,8 @@ const ModalViewUser = (props) => {
     if (res.data && res.data.EC === 0) {
       toast.success(res.data.EM);
       handleClose();
-      props.fetchListUser(); // Directly use fetchListUser here
+      props.setCurrentPage(1);
+      props.fetchListUserWithPaginate(1); // Directly use fetchListUser here
     }
 
     if (res.data && res.data.EC !== 0) {
@@ -149,9 +150,9 @@ const ModalViewUser = (props) => {
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        {/* <Button variant="primary" onClick={handleUpdateUser}>
+        <Button variant="primary" onClick={handleUpdateUser}>
           Save Changes
-        </Button> */}
+        </Button>
       </Modal.Footer>
     </Modal>
   );

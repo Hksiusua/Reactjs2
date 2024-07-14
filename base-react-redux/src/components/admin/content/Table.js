@@ -1,4 +1,5 @@
 import "./Table.scss";
+import ReactPaginate from "react-paginate";
 const Table = (props) => {
   const { ListUser } = props;
   return (
@@ -49,6 +50,9 @@ const Table = (props) => {
                     <button
                       type="button"
                       className="btn btn-danger designSizeButton"
+                      onClick={() => {
+                        props.handleClickBtnDelete(user);
+                      }}
                     >
                       Delete
                     </button>

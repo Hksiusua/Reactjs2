@@ -24,4 +24,23 @@ const putUpdateUser = (id, username, role, image) => {
   return instance.put("api/v1/participant", data); // this is data is take data so add
 };
 
-export { createUser, showAllUser, putUpdateUser };
+const deleteUser = (userId) => {
+  return instance.delete("api/v1/participant", { data: { id: userId } }); // this is data is take data so add
+};
+
+const getUserWithPaginate = (page, limit) => {
+  return instance.get(`api/v1/participant?page=${page}&limit=${limit}`); // this is data is take data so add
+};
+
+const postLoginUser = (email, password) => {
+  return instance.post(`api/v1/login`, { email, password });
+};
+
+export {
+  createUser,
+  showAllUser,
+  putUpdateUser,
+  deleteUser,
+  getUserWithPaginate,
+  postLoginUser,
+};

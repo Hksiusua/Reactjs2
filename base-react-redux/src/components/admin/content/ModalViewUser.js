@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import _ from "lodash";
 
 const ModalUpdateUser = (props) => {
-  const { show, onHide, dataUpdate } = props;
+  const { show, onHide } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -123,5 +123,4 @@ const ModalUpdateUser = (props) => {
     </Modal>
   );
 };
-
 export default ModalUpdateUser;
