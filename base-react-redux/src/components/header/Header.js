@@ -4,7 +4,13 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink } from "react-router-dom";
 import "./Header.scss";
+import { useSelector } from "react-redux";
+
 function BasicExample() {
+  // access rootReducer take user=>userReducer take the data
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const account = useSelector((state) => state.user.account);
+  console.log("Check ", account);
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -25,25 +31,33 @@ function BasicExample() {
             </NavLink>
           </Nav>
           <Nav>
-            <NavLink to="/logins" className="nav-link fontText">
-              Login
-            </NavLink>
-
-            <NavLink to="/" className="nav-link ">
-              Sign up
-            </NavLink>
-
-            {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown> */}
+            {isAuthenticated === false ? (
+              <>
+                <NavLink to="/logins" className="nav-link fontText">
+                  Login
+                </NavLink>
+                <NavLink to="/registers" className="nav-link">
+                  Sign up
+                </NavLink>
+              </>
+            ) : (
+              <NavDropdown
+                title={account.username || "Dropdown"}
+                id="basic-nav-dropdown"
+              >
+                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">
+                  Another action
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">
+                  Something
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  Separated link
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

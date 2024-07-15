@@ -3,11 +3,13 @@ import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import { postLoginUser } from "../service/apiService";
 import { toast } from "react-toastify";
-
+import { useDispatch } from "react-redux";
+import { doLogin } from "../../redux/action/userAction";
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleLogin = async (e) => {
     e.preventDefault(); // Prevent form submission from reloading the page
 
@@ -16,8 +18,14 @@ const Login = (props) => {
     const passwordValue = password;
 
     let res = await postLoginUser(emailValue, passwordValue);
-    console.log("ress ", res);
+    // console.log("ress ", res);
     if (res.data && res.data.EC === 0) {
+      dispatch(doLogin(res));
+
+      // dispatch({
+      //   type: "FETCH_USER_LOGIN_SUCCESS",
+      //   payload: res,
+      // });
       toast.success(res.data.EM);
       navigate("/");
     }

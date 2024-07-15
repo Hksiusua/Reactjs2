@@ -15,36 +15,40 @@ import Login from "./components/Auth/Login";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Register from "./components/Auth/Register";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />}>
-        <Route index element={<HomePage />}></Route>
+  <Provider store={store}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route index element={<HomePage />}></Route>
 
-        <Route path="users" element={<User />}></Route>
-      </Route>
-      <Route path="/admins" element={<Admin />}>
-        <Route index element={<DashBoard />}></Route>
-        <Route path="manage-users" element={<Manager />}></Route>
-      </Route>
+          <Route path="users" element={<User />}></Route>
+        </Route>
+        <Route path="/admins" element={<Admin />}>
+          <Route index element={<DashBoard />}></Route>
+          <Route path="manage-users" element={<Manager />}></Route>
+        </Route>
 
-      <Route path="/logins" element={<Login />}></Route>
-    </Routes>
-    <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
-    />
-  </BrowserRouter>
+        <Route path="/logins" element={<Login />}></Route>
+        <Route path="/registers" element={<Register />}></Route>
+      </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+    </BrowserRouter>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
