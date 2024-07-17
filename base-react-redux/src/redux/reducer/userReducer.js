@@ -1,5 +1,5 @@
 import { INCREMENT, DECREMENT } from "../action/counterAction";
-import { FETCH_USER_LOGIN_SUCCESS } from "../action/userAction";
+import { FETCH_USER_LOGIN_SUCCESS } from "../../redux/action/userAction";
 const INITIAL_STATE = {
   account: {
     access_token: "",
@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_USER_LOGIN_SUCCESS:
-      console.log(action);
+      // console.log(action);
       return {
         ...state,
         account: {
@@ -26,11 +26,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
         isAuthenticated: true,
       };
 
-    case DECREMENT:
-      return {
-        ...state,
-        count: state.count - 1,
-      };
     default:
       return state;
   }

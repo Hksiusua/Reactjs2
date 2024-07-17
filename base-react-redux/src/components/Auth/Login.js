@@ -3,7 +3,7 @@ import "./Login.scss";
 import { useNavigate } from "react-router-dom";
 import { postLoginUser } from "../service/apiService";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux"; // the dispath the same navigate
 import { doLogin } from "../../redux/action/userAction";
 const Login = (props) => {
   const [email, setEmail] = useState("");
@@ -22,7 +22,7 @@ const Login = (props) => {
     if (res.data && res.data.EC === 0) {
       dispatch(doLogin(res));
 
-      // dispatch({
+      // dispatch({ define 1 action
       //   type: "FETCH_USER_LOGIN_SUCCESS",
       //   payload: res,
       // });
