@@ -1,16 +1,17 @@
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink } from "react-router-dom";
-import "./Header.scss";
 import { useSelector } from "react-redux";
+import "./Header.scss";
 
 function BasicExample() {
-  // access rootReducer take user=>userReducer take the data
+  // Access rootReducer to get userReducer data
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
-  console.log("Check ", account);
+  console.log("checkkkk", account);
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -31,7 +32,7 @@ function BasicExample() {
             </NavLink>
           </Nav>
           <Nav>
-            {isAuthenticated === false ? (
+            {!isAuthenticated ? (
               <>
                 <NavLink to="/logins" className="nav-link fontText">
                   Login
@@ -41,21 +42,11 @@ function BasicExample() {
                 </NavLink>
               </>
             ) : (
-              <NavDropdown
-                title={account.username || "Dropdown"}
-                id="basic-nav-dropdown"
-              >
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
+              <NavDropdown title={account.username}>
+                <div></div>
+                <NavDropdown.Item href="#action/3.2">Logout</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Language</NavDropdown.Item>
               </NavDropdown>
             )}
           </Nav>

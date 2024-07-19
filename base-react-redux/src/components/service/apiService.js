@@ -40,6 +40,9 @@ const postRegisterUser = (email, username, password) => {
   return instance.post(`api/v1/register`, { email, username, password });
 };
 
+const getQuizByUser = () => {
+  return instance.get("api/v1/quiz-by-participant");
+};
 export {
   createUser,
   showAllUser,
@@ -48,4 +51,5 @@ export {
   getUserWithPaginate,
   postLoginUser,
   postRegisterUser,
+  getQuizByUser,
 };

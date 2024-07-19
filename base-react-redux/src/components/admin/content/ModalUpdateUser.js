@@ -59,6 +59,7 @@ const ModalViewUser = (props) => {
     if (res.data && res.data.EC === 0) {
       toast.success(res.data.EM);
       handleClose();
+      console.log(res);
       props.setCurrentPage(1);
       props.fetchListUserWithPaginate(1); // Directly use fetchListUser here
     }
@@ -110,7 +111,6 @@ const ModalViewUser = (props) => {
             type="password"
             className="form-control"
             value={password}
-            disabled
           />
         </div>
         <label htmlFor="exampleFormControlInput1" className="form-label">
