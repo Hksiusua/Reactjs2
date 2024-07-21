@@ -21,11 +21,6 @@ const Login = (props) => {
     // console.log("ress ", res);
     if (res.data && res.data.EC === 0) {
       dispatch(doLogin(res.data));
-      // define 1 action
-      // dispatch({
-      //   type: "FETCH_USER_LOGIN_SUCCESS",
-      //   payload: res,
-      // });
       toast.success(res.data.EM);
       navigate("/");
     }

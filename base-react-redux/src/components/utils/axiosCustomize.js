@@ -14,10 +14,8 @@ instance.interceptors.request.use(
         config.headers["Authorization"] = `Bearer ${access_token}`;
       }
     }
-
     // console.log("store getState", state);
     // console.log("Request headers:", config.headers); // Log headers for debugging
-
     return config;
   },
   (error) => {

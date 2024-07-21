@@ -21,6 +21,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Register from "./components/Auth/Register";
 import { PersistGate } from "redux-persist/integration/react";
 import ListQuiz from "./components/user/ListQuizzUser";
+import DetailQuiz from "./components/user/DetailQuiz";
+import NotFound from "./components/Error/NotFound";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -30,9 +32,11 @@ root.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<HomePage />}></Route>
-
             <Route path="users" element={<ListQuiz />}></Route>
           </Route>
+
+          <Route path="/quiz/:id" element={<DetailQuiz />}></Route>
+
           <Route path="/admins" element={<Admin />}>
             <Route index element={<DashBoard />}></Route>
             <Route path="manage-users" element={<Manager />}></Route>
@@ -40,6 +44,8 @@ root.render(
 
           <Route path="/logins" element={<Login />}></Route>
           <Route path="/registers" element={<Register />}></Route>
+
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
         <ToastContainer
           position="top-right"

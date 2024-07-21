@@ -43,6 +43,10 @@ const postRegisterUser = (email, username, password) => {
 const getQuizByUser = () => {
   return instance.get("api/v1/quiz-by-participant");
 };
+const getDataQuestion = (id) => {
+  return instance.get(`api/v1/questions-by-quiz?quizId=${id}`);
+};
+
 export {
   createUser,
   showAllUser,
@@ -52,4 +56,5 @@ export {
   postLoginUser,
   postRegisterUser,
   getQuizByUser,
+  getDataQuestion,
 };

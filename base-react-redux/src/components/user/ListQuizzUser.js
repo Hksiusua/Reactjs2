@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getQuizByUser } from "../service/apiService";
 import "./ListQuizzUser.scss";
+import { useNavigate } from "react-router-dom";
 
 const ListQuizzUser = () => {
   const [arrQuizz, setArrQuizz] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getQuizData();
@@ -30,20 +32,33 @@ const ListQuizzUser = () => {
           arrQuizz.length > 0 &&
           arrQuizz.map((quiz, index) => (
             <div className="card" key={index}>
-              <img
-                style={{ display: "block", width: "100px" }}
-                id="base64image"
-                src={`data:image/jpeg;base64,${quiz.image}`}
-              />
+              <div
+                style={{
+                  width: "100%",
+                  height: "250px",
+                  display: "flex",
+                  justifyContent: "center",
+                  paddingTop: "5px",
+                }}
+              >
+                <img
+                  style={{ display: "block", width: "180px" }}
+                  id="base64image"
+                  src={`data:image/jpeg;base64,${quiz.image}`}
+                />
+              </div>
               <div className="card-body">
-                <h5 className="card-title">{quiz.description}</h5>
-                <p className="card-text">
-                  Quiz ID: {quiz.id}, Start: {quiz.time_start}, End:{" "}
-                  {quiz.time_end}
-                </p>
-                <a href="#" className="btn btn-primary">
-                  Go somewhere
-                </a>
+                <h5 className="card-title">Quiz: {index + 1}</h5>
+                <p className="card-text">{quiz.description}</p>
+                <button
+                  type="button"
+                  class="btn btn-info"
+                  onClick={() => {
+                    navigate(`/quiz/${quiz.id}`);
+                  }}
+                >
+                  Search Detail
+                </button>
               </div>
             </div>
           ))}
