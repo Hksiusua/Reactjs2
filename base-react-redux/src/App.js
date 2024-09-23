@@ -7,9 +7,9 @@ import Admin from "./components/admin/Admin";
 
 const App = () => {
   return (
-    <div className="container">
+    <div>
       <div className="header-container">
-        <Header />
+        <Header/>
       </div>
 
       {/* <div className="main-container">

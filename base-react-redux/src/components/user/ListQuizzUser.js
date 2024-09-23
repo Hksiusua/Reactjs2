@@ -6,11 +6,9 @@ import { useNavigate } from "react-router-dom";
 const ListQuizzUser = () => {
   const [arrQuizz, setArrQuizz] = useState([]);
   const navigate = useNavigate();
-
   useEffect(() => {
     getQuizData();
   }, []);
-
   const getQuizData = async () => {
     try {
       const res = await getQuizByUser();
@@ -24,7 +22,6 @@ const ListQuizzUser = () => {
       console.error("Error fetching quizzes:", error);
     }
   };
-
   return (
     <div className="container-design">
       <div className="main">
@@ -54,7 +51,9 @@ const ListQuizzUser = () => {
                   type="button"
                   class="btn btn-info"
                   onClick={() => {
-                    navigate(`/quiz/${quiz.id}`);
+                    navigate(`/quiz/${quiz.id}`, {
+                      state: { quizzTittle: quiz.description },
+                    });
                   }}
                 >
                   Search Detail

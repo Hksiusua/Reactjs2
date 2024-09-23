@@ -47,6 +47,10 @@ const getDataQuestion = (id) => {
   return instance.get(`api/v1/questions-by-quiz?quizId=${id}`);
 };
 
+const postFinishQuiz = (data) => {
+  return instance.post(`api/v1/quiz-submit`, { ...data });
+};
+
 export {
   createUser,
   showAllUser,
@@ -57,4 +61,5 @@ export {
   postRegisterUser,
   getQuizByUser,
   getDataQuestion,
+  postFinishQuiz,
 };
